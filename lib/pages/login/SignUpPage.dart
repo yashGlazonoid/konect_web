@@ -13,11 +13,13 @@ class SignUpPage extends StatefulWidget {
     required this.name,
     required this.email,
     required this.uid,
+    required this.imageUrl,
   }) : super(key: key);
 
   final String name;
   final String email;
   final String uid;
+  final String imageUrl;
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -113,105 +115,461 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldMessenger(
-      child: Scaffold(
+    return Scaffold(
 
-        body: Row(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'Welcome to Glazonoid',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+      body: Row(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Welcome to Glazonoid',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Divider(
-                      height: 1,
-                      color: Colors.grey,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(top: 20), // Add marginTop here
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.name,
-                                            decoration: InputDecoration(
-                                              labelText: 'First Name',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your first name';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              _firstName = value;
-                                            },
+                  ),
+                  Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 20), // Add marginTop here
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.name,
+                                          decoration: InputDecoration(
+                                            labelText: 'First Name',
+                                            border: OutlineInputBorder(),
                                           ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your first name';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _firstName = value;
+                                          },
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.name,
-                                            decoration: InputDecoration(
-                                              labelText: 'Last Name',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your last name';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              _lastName = value;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.streetAddress,
-                                      maxLines: null,
-                                      decoration: InputDecoration(
-                                        labelText: 'Address',
-                                        border: OutlineInputBorder(),
-                                      ),
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter your address';
-                                        }
-                                        return null;
-                                      },
-                                      onSaved: (value) {
-                                        _address = value;
-                                      },
                                     ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.name,
+                                          decoration: InputDecoration(
+                                            labelText: 'Last Name',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your last name';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _lastName = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    keyboardType: TextInputType.streetAddress,
+                                    maxLines: null,
+                                    decoration: InputDecoration(
+                                      labelText: 'Address',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your address';
+                                      }
+                                      return null;
+                                    },
+                                    onSaved: (value) {
+                                      _address = value;
+                                    },
                                   ),
-                                  Row(
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.streetAddress,
+                                          decoration: InputDecoration(
+                                            labelText: 'State',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your state';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _state = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.number,
+                                          decoration: InputDecoration(
+                                            labelText: 'Pincode',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your pincode';
+                                            }else if (!isNumeric(value)) {
+                                              return 'Enter valid pincode';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _pincode = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row   (
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.phone,
+                                          decoration: InputDecoration(
+                                            prefixText: '+91-',
+                                            labelText: 'Mobile',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your mobile';
+                                            }else if (!isNumeric(value)) {
+                                              return 'Enter valid mobile number';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _mobile = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.emailAddress,
+                                          decoration: InputDecoration(
+                                            labelText: 'Personal Email',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your email';
+                                            }else if(!value.contains("@")){
+                                              return "Enter a valid email";
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _email = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          controller: _dateController,
+                                          onTap: () => _selectDate(context),
+                                          decoration: InputDecoration(
+                                            labelText: 'Date of Birth',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your date of birth';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+
+                                          },
+                                        ),
+
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          controller: TextEditingController(text: gender),
+                                          readOnly: true,
+                                          onTap: () {
+                                            showDropdown(context);
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: 'Gender',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your last name';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            gender = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.streetAddress,
+                                          decoration: InputDecoration(
+                                            labelText: 'Aadhar',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your aadhar number';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _aadhar = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            labelText: 'Pan',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your pan number';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _pan = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          controller: TextEditingController(text: marital),
+                                          readOnly: true,
+                                          onTap:() {
+                                            showDropdownMarried(context);
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: 'Marital Status',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your marital status';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            marital = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          controller: TextEditingController(text: bloodGroup),
+                                          readOnly: true,
+                                          onTap:() {
+                                            showDropdownBlood(context);
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: 'Blood Group',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your blood group';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            bloodGroup = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          controller: TextEditingController(text: heightFoot),
+                                          readOnly: true,
+                                          onTap: () {
+                                            showDropdownHeightFoot(context);
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: 'Height (foot)',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your height(foot)';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            heightFoot = value!;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          controller: TextEditingController(text: heightInches),
+                                          readOnly: true,
+                                          onTap: () {
+                                            showDropdownHeightInches(context);
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: 'Height(inches)',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your height(inches)';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            heightInches = value!;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+
+
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.number,
+                                          decoration: InputDecoration(
+                                            labelText: 'Weight (Kg)',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your weight';
+                                            }else if(!isNumeric(value)){
+                                              return "Enter valid value";
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _weight = value as String?;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          controller: TextEditingController(text: experience),
+                                          readOnly: true,
+                                          onTap:() {
+                                            showDropdownExperience(context);
+                                          },
+                                          decoration: InputDecoration(
+                                            labelText: 'Experience',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your experience';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            experience = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+
+
+                                  ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 8),
+                                  child: Row(
                                     children: [
                                       Expanded(
                                         child: Padding(
@@ -219,17 +577,17 @@ class _SignUpPageState extends State<SignUpPage> {
                                           child: TextFormField(
                                             keyboardType: TextInputType.streetAddress,
                                             decoration: InputDecoration(
-                                              labelText: 'State',
+                                              labelText: 'Nationality',
                                               border: OutlineInputBorder(),
                                             ),
                                             validator: (value) {
                                               if (value == null || value.isEmpty) {
-                                                return 'Please enter your state';
+                                                return 'Please enter your nationality';
                                               }
                                               return null;
                                             },
                                             onSaved: (value) {
-                                              _state = value;
+                                              _nationality = value;
                                             },
                                           ),
                                         ),
@@ -238,149 +596,67 @@ class _SignUpPageState extends State<SignUpPage> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: TextFormField(
-                                            keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
-                                              labelText: 'Pincode',
+                                              labelText: 'Religion',
                                               border: OutlineInputBorder(),
                                             ),
                                             validator: (value) {
                                               if (value == null || value.isEmpty) {
-                                                return 'Please enter your pincode';
-                                              }else if (!isNumeric(value)) {
-                                                return 'Enter valid pincode';
+                                                return 'Please enter your religion';
                                               }
                                               return null;
                                             },
                                             onSaved: (value) {
-                                              _pincode = value;
+                                              _religion = value;
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              labelText: 'Birth Place',
+                                              border: OutlineInputBorder(),
+                                            ),
+                                            validator: (value) {
+                                              if (value == null || value.isEmpty) {
+                                                return 'Please enter your birth place';
+                                              }
+                                              return null;
+                                            },
+                                            onSaved: (value) {
+                                              _birthPlace = value;
                                             },
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  Row   (
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 8),
+                                  child: Row(
                                     children: [
                                       Expanded(
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: TextFormField(
-                                            keyboardType: TextInputType.phone,
+                                            keyboardType: TextInputType.name,
                                             decoration: InputDecoration(
-                                              prefixText: '+91-',
-                                              labelText: 'Mobile',
+                                              labelText: 'Mother Name',
                                               border: OutlineInputBorder(),
                                             ),
                                             validator: (value) {
                                               if (value == null || value.isEmpty) {
-                                                return 'Please enter your mobile';
-                                              }else if (!isNumeric(value)) {
-                                                return 'Enter valid mobile number';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              _mobile = value;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.emailAddress,
-                                            decoration: InputDecoration(
-                                              labelText: 'Personal Email',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your email';
-                                              }else if(!value.contains("@")){
-                                                return "Enter a valid email";
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              _email = value;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: _dateController,
-                                            onTap: () => _selectDate(context),
-                                            decoration: InputDecoration(
-                                              labelText: 'Date of Birth',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your date of birth';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
+                                                return 'Please enter mother\'s name';
 
-                                            },
-                                          ),
-
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: TextEditingController(text: gender),
-                                            readOnly: true,
-                                            onTap: () {
-                                              showDropdown(context);
-                                            },
-                                            decoration: InputDecoration(
-                                              labelText: 'Gender',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your last name';
                                               }
                                               return null;
                                             },
                                             onSaved: (value) {
-                                              gender = value;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.streetAddress,
-                                            decoration: InputDecoration(
-                                              labelText: 'Aadhar',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your aadhar number';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              _aadhar = value;
+                                              _motherName = value;
                                             },
                                           ),
                                         ),
@@ -390,941 +666,665 @@ class _SignUpPageState extends State<SignUpPage> {
                                           padding: const EdgeInsets.all(8.0),
                                           child: TextFormField(
                                             decoration: InputDecoration(
-                                              labelText: 'Pan',
+                                              labelText: 'Father Name',
                                               border: OutlineInputBorder(),
                                             ),
                                             validator: (value) {
                                               if (value == null || value.isEmpty) {
-                                                return 'Please enter your pan number';
+                                                return 'Please enter father\'s name';
                                               }
                                               return null;
                                             },
                                             onSaved: (value) {
-                                              _pan = value;
+                                              _fatherName = value;
                                             },
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: TextEditingController(text: marital),
-                                            readOnly: true,
-                                            onTap:() {
-                                              showDropdownMarried(context);
-                                            },
-                                            decoration: InputDecoration(
-                                              labelText: 'Marital Status',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your marital status';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              marital = value;
-                                            },
-                                          ),
-                                        ),
-                                      ),Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: TextEditingController(text: bloodGroup),
-                                            readOnly: true,
-                                            onTap:() {
-                                              showDropdownBlood(context);
-                                            },
-                                            decoration: InputDecoration(
-                                              labelText: 'Blood Group',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your blood group';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              bloodGroup = value;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: TextEditingController(text: heightFoot),
-                                            readOnly: true,
-                                            onTap: () {
-                                              showDropdownHeightFoot(context);
-                                            },
-                                            decoration: InputDecoration(
-                                              labelText: 'Height (foot)',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your height(foot)';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              heightFoot = value!;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: TextEditingController(text: heightInches),
-                                            readOnly: true,
-                                            onTap: () {
-                                              showDropdownHeightInches(context);
-                                            },
-                                            decoration: InputDecoration(
-                                              labelText: 'Height(inches)',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your height(inches)';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              heightInches = value!;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-
-
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            keyboardType: TextInputType.number,
-                                            decoration: InputDecoration(
-                                              labelText: 'Weight (Kg)',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your weight';
-                                              }else if(!isNumeric(value)){
-                                                return "Enter valid value";
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              _weight = value as String?;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            controller: TextEditingController(text: experience),
-                                            readOnly: true,
-                                            onTap:() {
-                                              showDropdownExperience(context);
-                                            },
-                                            decoration: InputDecoration(
-                                              labelText: 'Experience',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your experience';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              experience = value;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-
 
                                     ],
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 8),
-                                    child: Row(
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            labelText: 'Mother Tounge',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your mother tounge';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _motherTounge = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            labelText: 'Hobbies',
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          validator: (value) {
+                                            if (value == null || value.isEmpty) {
+                                              return 'Please enter your hobbies';
+                                            }
+                                            return null;
+                                          },
+                                          onSaved: (value) {
+                                            _hobbies = value;
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
+                                    child: Column(
                                       children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: TextFormField(
-                                              keyboardType: TextInputType.streetAddress,
-                                              decoration: InputDecoration(
-                                                labelText: 'Nationality',
-                                                border: OutlineInputBorder(),
-                                              ),
-                                              validator: (value) {
-                                                if (value == null || value.isEmpty) {
-                                                  return 'Please enter your nationality';
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (value) {
-                                                _nationality = value;
-                                              },
-                                            ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 8),
+                                          child: Text(
+                                            "10th Academic Details",
+                                            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: TextFormField(
-                                              decoration: InputDecoration(
-                                                labelText: 'Religion',
-                                                border: OutlineInputBorder(),
+                                        Divider(),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.streetAddress,
+                                                  decoration: InputDecoration(
+                                                    labelText: '10th Percentage',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your 10th percentage';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _10percentage = value;
+                                                  },
+                                                ),
                                               ),
-                                              validator: (value) {
-                                                if (value == null || value.isEmpty) {
-                                                  return 'Please enter your religion';
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (value) {
-                                                _religion = value;
-                                              },
                                             ),
-                                          ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: '10th Passing year',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your passing year';
+                                                    }else if (!isNumeric(value)) {
+                                                      return 'Enter valid passing year';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _10passingYear = value;
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: TextFormField(
-                                              decoration: InputDecoration(
-                                                labelText: 'Birth Place',
-                                                border: OutlineInputBorder(),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.text,
+                                                  decoration: InputDecoration(
+                                                    labelText: '10th Board',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your 10th board';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _10board = value;
+                                                  },
+                                                ),
                                               ),
-                                              validator: (value) {
-                                                if (value == null || value.isEmpty) {
-                                                  return 'Please enter your birth place';
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (value) {
-                                                _birthPlace = value;
-                                              },
                                             ),
-                                          ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: '10th institution',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your institution';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _10institution = value;
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 8),
-                                    child: Row(
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
+                                    child: Column(
                                       children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: TextFormField(
-                                              keyboardType: TextInputType.name,
-                                              decoration: InputDecoration(
-                                                labelText: 'Mother Name',
-                                                border: OutlineInputBorder(),
-                                              ),
-                                              validator: (value) {
-                                                if (value == null || value.isEmpty) {
-                                                  return 'Please enter mother\'s name';
-
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (value) {
-                                                _motherName = value;
-                                              },
-                                            ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 8),
+                                          child: Text(
+                                            "12th Academic Details",
+                                            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: TextFormField(
-                                              decoration: InputDecoration(
-                                                labelText: 'Father Name',
-                                                border: OutlineInputBorder(),
+                                        Divider(),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.streetAddress,
+                                                  decoration: InputDecoration(
+                                                    labelText: '12th Percentage',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your 12th percentage';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _12percentage = value;
+                                                  },
+                                                ),
                                               ),
-                                              validator: (value) {
-                                                if (value == null || value.isEmpty) {
-                                                  return 'Please enter father\'s name';
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (value) {
-                                                _fatherName = value;
-                                              },
                                             ),
-                                          ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: '12th Passing year',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your passing year';
+                                                    }else if (!isNumeric(value)) {
+                                                      return 'Enter valid passing year';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _12passingYear = value;
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.text,
+                                                  decoration: InputDecoration(
+                                                    labelText: '12th Board',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your 12th board';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _12board = value;
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: '12th institution',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your institution';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _12institution = value;
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            decoration: InputDecoration(
-                                              labelText: 'Mother Tounge',
-                                              border: OutlineInputBorder(),
-                                            ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your mother tounge';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              _motherTounge = value;
-                                            },
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(top: 8),
+                                          child: Text(
+                                            "Graduation Academic Details",
+                                            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TextFormField(
-                                            decoration: InputDecoration(
-                                              labelText: 'Hobbies',
-                                              border: OutlineInputBorder(),
+                                        Divider(),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.streetAddress,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Graduation Percentage',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your Graduation';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _graduationpercentage = value;
+                                                  },
+                                                ),
+                                              ),
                                             ),
-                                            validator: (value) {
-                                              if (value == null || value.isEmpty) {
-                                                return 'Please enter your hobbies';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {
-                                              _hobbies = value;
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius: BorderRadius.circular(2.0),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 8),
-                                            child: Text(
-                                              "10th Academic Details",
-                                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Graduation Passing year',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your passing year';
+                                                    }else if (!isNumeric(value)) {
+                                                      return 'Enter valid passing year';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _graduationpassingYear = value;
+                                                  },
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                          Divider(),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.streetAddress,
-                                                    decoration: InputDecoration(
-                                                      labelText: '10th Percentage',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your 10th percentage';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _10percentage = value;
-                                                    },
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.text,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Graduation Degree',
+                                                    border: OutlineInputBorder(),
                                                   ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your degree';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _graduationDegree = value;
+                                                  },
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: '10th Passing year',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your passing year';
-                                                      }else if (!isNumeric(value)) {
-                                                        return 'Enter valid passing year';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _10passingYear = value;
-                                                    },
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Graduation institution',
+                                                    border: OutlineInputBorder(),
                                                   ),
+                                                  validator: (value) {
+                                                    if (value == null || value.isEmpty) {
+                                                      return 'Please enter your institution';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onSaved: (value) {
+                                                    _graduationinstitution = value;
+                                                  },
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.text,
-                                                    decoration: InputDecoration(
-                                                      labelText: '10th Board',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your 10th board';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _10board = value;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: '10th institution',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your institution';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _10institution = value;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1.0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(top: 8),
+                                          child: Text(
+                                            "Post Graduation Academic Details",
+                                            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                        borderRadius: BorderRadius.circular(2.0),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 8),
-                                            child: Text(
-                                              "12th Academic Details",
-                                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                        Divider(),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.streetAddress,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Post Graduation Percentage',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  onSaved: (value) {
+                                                    _postgraduationpercentage = value!;
+                                                  },
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                          Divider(),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.streetAddress,
-                                                    decoration: InputDecoration(
-                                                      labelText: '12th Percentage',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your 12th percentage';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _12percentage = value;
-                                                    },
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Post Graduation Passing year',
+                                                    border: OutlineInputBorder(),
                                                   ),
+                                                  onSaved: (value) {
+                                                    _postgraduationpassingYear = value!;
+                                                  },
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: '12th Passing year',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your passing year';
-                                                      }else if (!isNumeric(value)) {
-                                                        return 'Enter valid passing year';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _12passingYear = value;
-                                                    },
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.text,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Post Graduation Degree',
+                                                    border: OutlineInputBorder(),
                                                   ),
+                                                  onSaved: (value) {
+                                                    _postgraduationDegree = value!;
+                                                  },
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.text,
-                                                    decoration: InputDecoration(
-                                                      labelText: '12th Board',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your 12th board';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _12board = value;
-                                                    },
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Post Graduation institution',
+                                                    border: OutlineInputBorder(),
                                                   ),
+                                                  onSaved: (value) {
+                                                    _postgraduationinstitution = value!;
+                                                  },
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: '12th institution',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your institution';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _12institution = value;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1.0,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(top: 8),
+                                          child: Text(
+                                            "Previous Employment Details",
+                                            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                          ),
                                         ),
-                                        borderRadius: BorderRadius.circular(2.0),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 8),
-                                            child: Text(
-                                              "Graduation Academic Details",
-                                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                        Divider(),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.streetAddress,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Company Name',
+                                                    border: OutlineInputBorder(),
+                                                  ),
+                                                  onSaved: (value) {
+                                                    _companyName = value!;
+                                                  },
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                          Divider(),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.streetAddress,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Graduation Percentage',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your Graduation';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _graduationpercentage = value;
-                                                    },
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Contact Number',
+                                                    border: OutlineInputBorder(),
                                                   ),
+                                                  onSaved: (value) {
+                                                    _contactNumber = value!;
+                                                  },
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Graduation Passing year',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your passing year';
-                                                      }else if (!isNumeric(value)) {
-                                                        return 'Enter valid passing year';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _graduationpassingYear = value;
-                                                    },
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.text,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Contact Person Name',
+                                                    border: OutlineInputBorder(),
                                                   ),
+                                                  onSaved: (value) {
+                                                    _contactPersonName = value!;
+                                                  },
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.text,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Graduation Degree',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your degree';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _graduationDegree = value;
-                                                    },
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: TextFormField(
+                                                  keyboardType: TextInputType.number,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Role',
+                                                    border: OutlineInputBorder(),
                                                   ),
+                                                  onSaved: (value) {
+                                                    _role = value!;
+                                                  },
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Graduation institution',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    validator: (value) {
-                                                      if (value == null || value.isEmpty) {
-                                                        return 'Please enter your institution';
-                                                      }
-                                                      return null;
-                                                    },
-                                                    onSaved: (value) {
-                                                      _graduationinstitution = value;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius: BorderRadius.circular(2.0),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 8),
-                                            child: Text(
-                                              "Post Graduation Academic Details",
-                                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Divider(),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.streetAddress,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Post Graduation Percentage',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    onSaved: (value) {
-                                                      _postgraduationpercentage = value!;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Post Graduation Passing year',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    onSaved: (value) {
-                                                      _postgraduationpassingYear = value!;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.text,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Post Graduation Degree',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    onSaved: (value) {
-                                                      _postgraduationDegree = value!;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Post Graduation institution',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    onSaved: (value) {
-                                                      _postgraduationinstitution = value!;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius: BorderRadius.circular(2.0),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 8),
-                                            child: Text(
-                                              "Previous Employment Details",
-                                              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Divider(),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.streetAddress,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Company Name',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    onSaved: (value) {
-                                                      _companyName = value!;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Contact Number',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    onSaved: (value) {
-                                                      _contactNumber = value!;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.text,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Contact Person Name',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    onSaved: (value) {
-                                                      _contactPersonName = value!;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: TextFormField(
-                                                    keyboardType: TextInputType.number,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'Role',
-                                                      border: OutlineInputBorder(),
-                                                    ),
-                                                    onSaved: (value) {
-                                                      _role = value!;
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                ),
 
-                                  Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Container(
-                                      width: 400,
-                                      height: 50,
-                                      child: Expanded(
-                                        child: ElevatedButton(
-                                          onPressed: _submitForm,
-                                          child: Text('Submit'),
-                                        ),
+                                Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Container(
+                                    width: 400,
+                                    height: 50,
+                                    child: Expanded(
+                                      child: ElevatedButton(
+                                        onPressed: _submitForm,
+                                        child: Text('Submit'),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
+                      ),
 
-                        // Instruction Column on the right side
+                      // Instruction Column on the right side
 
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              width: 250,
-              padding: EdgeInsets.all(16),
-              color: Colors.grey[200],
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Instructions',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    '1. Enter your first name and last name in the designated fields.',
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    '2. Provide your complete address in the address field.',
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    '3. Once you have filled in all the details, click on the Submit button.',
+                    ],
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          Container(
+            width: 250,
+            padding: EdgeInsets.all(16),
+            color: Colors.grey[200],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Instructions',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  '1. Enter your first name and last name in the designated fields.',
+                ),
+                SizedBox(height: 8),
+                Text(
+                  '2. Provide your complete address in the address field.',
+                ),
+                SizedBox(height: 8),
+                Text(
+                  '3. Once you have filled in all the details, click on the Submit button.',
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -1595,33 +1595,18 @@ class _SignUpPageState extends State<SignUpPage> {
     try {
       await docRef.set(finalUserMap);
 
-      // Show a success SnackBar message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("User signed in Successfully!"),
-          backgroundColor: Colors.green,
-          duration: Duration(seconds: 2),
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(auth: true, name: '$_firstName $_lastName', email: widget.email, imageUrl:widget.imageUrl),
         ),
       );
 
-      Future.delayed(Duration(seconds: 2), () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomePage(auth: true, name: '$_firstName $_lastName', email: widget.email, imageUrl: ""),
-          ),
-        );
-      });
     } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Error adding data: $error"),
-          backgroundColor: Colors.red,
-          duration: Duration(seconds: 2),
-        ),
-      );
+      print(error);
     }
   }
+
 
 
   String generateUniqueRandomNumber() {

@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
       GoogleSignInButton(),
     ];
     if (!widget.auth) {
-      allPages.insert(0, SignUpPage(name: widget.name, email: widget.email, uid: widget.imageUrl));
+      allPages.insert(0, SignUpPage(name: widget.name, email: widget.email, uid: widget.imageUrl,imageUrl: widget.imageUrl,));
     }
     return allPages;
   }

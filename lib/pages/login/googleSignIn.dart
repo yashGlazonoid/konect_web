@@ -81,7 +81,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   void _checkUserExistOrNot(String name,String imageUrl,String userEmail) async {
     try {
       DocumentSnapshot documentSnapshot =
-      await FirebaseFirestore.instance.doc('Users/$name').get();
+      await FirebaseFirestore.instance.doc('temp/$name').get();
       if (documentSnapshot.exists) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setBool('auth', true);
@@ -92,7 +92,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
       } else {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SignUpPage(name: name,email: userEmail,uid: uid!,)),
+          MaterialPageRoute(builder: (context) => SignUpPage(name: name,email: userEmail,uid: uid!,imageUrl: imageUrl,)),
         );
       }
     } catch (e) {
